@@ -24,6 +24,11 @@
         h1 {
             font-size: 3rem;
             margin-bottom: 20px;
+            text-shadow: 
+                -1px -1px 0 black,  
+                 1px -1px 0 black,
+                -1px  1px 0 black,
+                 1px  1px 0 black;
         }
 
         .btn-entrar {
@@ -40,11 +45,21 @@
         .btn-entrar:hover {
             background-color: #006400; /* Tom mais escuro ao passar o mouse */
         }
+
+                .logo {
+            width: 300px; /* Altere conforme necessário */
+            height: auto; /* Mantém a proporção */
+            display: flex; /* Para centralizar, se necessário */
+            margin: 0 auto; /* Centraliza a imagem se a largura for menor que o container */
+            
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Bem-Vindo!</h1>
+        <img src="{{ asset('images/logo-mini.svg') }}" alt="logo" class="logo">
         <a href="{{ route('views.entrada.login') }}" class="btn-entrar">Entrar</a>
     </div>
 
