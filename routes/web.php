@@ -8,5 +8,6 @@ Route::get('/', function () {
 }); 
 
 Route::get('/login', function(){
-    return view('entrada/login');
+    return view('entrada.login');
 });
+
