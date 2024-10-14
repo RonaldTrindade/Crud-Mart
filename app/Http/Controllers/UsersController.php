@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     
+
+    public function telaLogin(){
+        return view('entrada.login');
+    }
+
+
     public function index()
     {
         

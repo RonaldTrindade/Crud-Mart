@@ -45,7 +45,8 @@
 <body>
     <div class="container">
         <h1>Bem-Vindo!</h1>
-        <button class="btn-entrar">Entrar</button>
+        <a href="{{ route('views.entrada.login') }}" class="btn-entrar">Entrar</a>
     </div>
+
 </body>
 </html>
