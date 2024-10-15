@@ -46,7 +46,7 @@
     <div class="container">
         <h1>Bem-Vindo!</h1>
         <button  
-        href="{{ route('/login') }}" class="btn-entrar">Entrar</a>
+        href="{{ route('telaLogin') }}" class="btn-entrar">Entrar</a>
         </button>
     </div>
 </body>

@@ -6,16 +6,32 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    
+    public function telaLogin(){
+        return view('entrada.login');
+    }
+
+    public function login(){
+        $email = request('email');
+        $senha = request('senha');
+
+        if($email == 'admin' && $senha == '123456'){
+            return redirect()->route('views.entrada.menu');
+        } else {
+            return redirect()->route('views.entrada.login')->with('mensagem', 'Email ou senha inválidos');
+        }
+    }
     public function index()
     {
         
     }
 
+    public function telaCadastro(){
+        return view('entrada.cadastro');
+    }
    
     public function create()
     {
-        
+        return "cadastro com sucesso";
     }
 
     

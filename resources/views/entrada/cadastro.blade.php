@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de login</title>
+    <title>Tela de Cadastro</title>
     <style>
         body, html {
             margin: 0;
@@ -16,7 +16,7 @@
             font-family: Arial, sans-serif;
         }
 
-        .login-container {
+        .cadastro-container {
             background-color: white;
             padding: 40px;
             border-radius: 10px;
@@ -30,7 +30,7 @@
             margin-bottom: 20px;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -39,7 +39,7 @@
             box-sizing: border-box;
         }
 
-        .btn-login {
+        .btn-cadastrar {
             width: 100%;
             padding: 10px;
             background-color: #228B22; /* Verde escuro */
@@ -52,34 +52,36 @@
             transition: background-color 0.3s ease;
         }
 
-        .btn-login:hover {
+        .btn-cadastrar:hover {
             background-color: #006400; /* Tom mais escuro ao passar o mouse */
         }
 
-        .login-container a {
+        .cadastro-container a {
             display: block;
             margin-top: 15px;
             color: #FFD700; /* Amarelo */
             text-decoration: none;
         }
 
-        .login-container a:hover {
+        .cadastro-container a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login</h2>
+    <div class="cadastro-container">
+        <h2>Cadastro</h2>
         <form
         @csrf 
-        action="{{ route('login') }}" method="POST">
-            <input type="text" placeholder="Usuário" name="nome" required>
+        action="{{ route('cadastrar') }}" method="POST">
+            <input type="text" placeholder="Nome" name="nome" required>
+            <input type="email" placeholder="Email" name="email" required>
             <input type="password" placeholder="Senha" name="senha" required>
-            <button type="submit" class="btn-login">Entrar</button>
+            <input type="date" placeholder="Data de Nascimento" name="dataNascimento" required>
+            <button type="submit" class="btn-cadastrar">Cadastrar</button>
         </form>
-        <a href="{{ route('telaCadastro') }}">Cadastre-se</a>
+        <a href="{{ route('telaLogin') }}">Voltar para Login</a>
     </div>
 
 </body>
