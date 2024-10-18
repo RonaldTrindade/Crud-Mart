@@ -79,13 +79,13 @@
             <form action="{{ route('cadastrar') }}" method="POST">
                 @csrf
                 <label for="nome">Nome:</label>
-                <input type="text" name="name" id="nome">
+                <input type="text" name="name" id="name">
         
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email">
         
                 <label for="senha">Senha:</label>
-                <input type="password" name="senha" id="senha">
+                <input type="password" name="password" id="password">
         
                 <label for="dataNascimento">Data de Nascimento:</label>
                 <input type="date" name="dataNascimento" id="dataNascimento"> 

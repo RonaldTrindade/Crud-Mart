@@ -40,20 +40,20 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users',
-            'senha' => 'required|min:6',
+            'password' => 'required|min:6',
             'dataNascimento' => 'required|date',
         ]);
     
         UsersModel::create([
-            'nome' => $request->nome,
+            'name' => $request->name,
             'email' => $request->email,
-            'senha' => bcrypt($request->senha),
+            'password' => bcrypt($request->password),
             'dataNascimento' => $request->dataNascimento,
         ]);
     
-        return redirect()->route('entrada.login')
+        return redirect()->route('telaLogin')
                         ->with('success', 'Usuário criado com sucesso.');
     }
 
