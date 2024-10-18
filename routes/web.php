@@ -8,4 +8,4 @@ Route::get('/', function () {return view('welcome');});
 Route::get('/login',[UsersController::class,'telaLogin'])->name('telaLogin');
 Route::post('/login', [UsersController::class,'login'])->name('login'); 
 Route::get('/cadastrar', [UsersController::class,'telaCadastro'])->name('telaCadastro');
-Route::post('/cadastrar', [UsersController::class,'create'])->name('cadastrar');
+Route::post('/cadastrar', [UsersController::class,'store'])->name('cadastrar');

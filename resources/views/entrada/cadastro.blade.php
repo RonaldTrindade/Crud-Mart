@@ -71,17 +71,29 @@
 <body>
 
     <div class="cadastro-container">
-        <h2>Cadastro</h2>
-        <form
-        @csrf 
-        action="{{ route('cadastrar') }}" method="POST">
-            <input type="text" placeholder="Nome" name="nome" required>
-            <input type="email" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Senha" name="senha" required>
-            <input type="date" placeholder="Data de Nascimento" name="dataNascimento" required>
-            <button type="submit" class="btn-cadastrar">Cadastrar</button>
-        </form>
-        <a href="{{ route('telaLogin') }}">Voltar para Login</a>
+
+
+        
+            <h1>cadastrar</h1>
+        
+            <form action="{{ route('cadastrar') }}" method="POST">
+                @csrf
+                <label for="nome">Nome:</label>
+                <input type="text" name="name" id="nome">
+        
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+        
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha">
+        
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" name="dataNascimento" id="dataNascimento"> 
+        
+                <button type="submit" class="btn-cadastrar">Criar</button>
+            </form>
+        
+        
     </div>
 
 </body>

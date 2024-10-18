@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UsersModel;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -20,6 +21,7 @@ class UsersController extends Controller
             return redirect()->route('views.entrada.login')->with('mensagem', 'Email ou senha inválidos');
         }
     }
+
     public function index()
     {
         
@@ -31,13 +33,28 @@ class UsersController extends Controller
    
     public function create()
     {
-        return "cadastro com sucesso";
+        
     }
 
     
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email|unique:users',
+            'senha' => 'required|min:6',
+            'dataNascimento' => 'required|date',
+        ]);
+    
+        UsersModel::create([
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'senha' => bcrypt($request->senha),
+            'dataNascimento' => $request->dataNascimento,
+        ]);
+    
+        return redirect()->route('entrada.login')
+                        ->with('success', 'Usuário criado com sucesso.');
     }
 
    
