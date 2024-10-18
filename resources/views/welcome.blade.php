@@ -45,9 +45,11 @@
 <body>
     <div class="container">
         <h1>Bem-Vindo!</h1>
-        <button  
-        href="{{ route('telaLogin') }}" class="btn-entrar">Entrar</a>
-        </button>
+        <a href="{{ route('telaLogin') }}">
+            <button
+            class="btn-entrar"> Entrar
+            </button>
+        </a>
     </div>
 </body>
 </html>
