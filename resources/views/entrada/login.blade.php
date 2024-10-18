@@ -75,7 +75,7 @@
         <form
         @csrf 
         action="{{ route('login') }}" method="POST">
-            <input type="text" placeholder="Usuário" name="nome" required>
+            <input type="text" placeholder="Email" name="email" required>
             <input type="password" placeholder="Senha" name="senha" required>
             <button type="submit" class="btn-login">Entrar</button>
         </form>
