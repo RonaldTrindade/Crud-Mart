@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de login</title>
+    <title>Tela de Login</title>
     <style>
         body, html {
             margin: 0;
@@ -18,14 +18,14 @@
 
         .login-container {
             background-color: white;
-            padding: 40px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
+            width: 400px;
             text-align: center;
         }
 
-        h2 {
+        h1 {
             color: #32CD32;
             margin-bottom: 20px;
         }
@@ -59,24 +59,71 @@
         .login-container a {
             display: block;
             margin-top: 15px;
-            color: #FFD700; /* Amarelo */
+            color: black;
             text-decoration: none;
         }
 
         .login-container a:hover {
             text-decoration: underline;
         }
+
+        /* Estilos para as mensagens de sucesso e erro */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
-<body>
+<body>  
 
     <div class="login-container">
-        <h2>Login</h2>
-        <form
-        @csrf 
-        action="{{ route('login') }}" method="POST">
-            <input type="text" placeholder="Email" name="email" required>
+        <h1>Login</h1>
+        
+        <!-- Exibir mensagem de sucesso -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Exibir mensagem de erro -->
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <!-- Exibir validação de erro de campos -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
+            <input type="text" placeholder="Email" name="email" value="{{ old('email') }}" required>
             <input type="password" placeholder="Senha" name="senha" required>
+
             <button type="submit" class="btn-login">Entrar</button>
         </form>
         <a href="{{ route('telaCadastro') }}">Cadastre-se</a>

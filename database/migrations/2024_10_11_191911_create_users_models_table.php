@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->date('dataNascimento');
         });
@@ -28,4 +28,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('users_models');
     }
+    
 };

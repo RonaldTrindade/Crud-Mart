@@ -18,21 +18,34 @@
 
         .cadastro-container {
             background-color: white;
-            padding: 40px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
+            width: 450px; /* Ajustado para mais espaço */
             text-align: center;
         }
 
-        h2 {
+        h1 {
             color: #32CD32;
             margin-bottom: 20px;
         }
 
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        label {
+            width: 25%; /* Define a largura do label */
+            text-align: left; /* Alinha o texto do label à esquerda */
+            font-size: 1rem;
+        }
+
         input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
-            width: 100%;
-            padding: 10px;
+            width: 80%; /* Define a largura do input */
+            padding: 8px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -66,34 +79,88 @@
         .cadastro-container a:hover {
             text-decoration: underline;
         }
+
+        /* Estilos para as mensagens de sucesso e erro */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert ul {
+            margin: 0;
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
 
     <div class="cadastro-container">
+        <h1>CADASTRAR</h1>
+        
+        <!-- Exibir mensagem de sucesso -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        <!-- Exibir mensagem de erro -->
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
-        
-            <h1>cadastrar</h1>
-        
-            <form action="{{ route('cadastrar') }}" method="POST">
-                @csrf
-                <label for="nome">Nome:</label>
-                <input type="text" name="name" id="name">
-        
+        <form action="{{ route('cadastrar') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" name="name" id="name" value="{{ old('name') }}">
+            </div>
+
+            <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email">
-        
-                <label for="senha">Senha:</label>
+                <input type="email" name="email" id="email" value="{{ old('email') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha:</label>
                 <input type="password" name="password" id="password">
-        
+            </div>
+
+            <div class="form-group">
                 <label for="dataNascimento">Data de Nascimento:</label>
-                <input type="date" name="dataNascimento" id="dataNascimento"> 
-        
-                <button type="submit" class="btn-cadastrar">Criar</button>
-            </form>
-        
-        
+                <input type="date" name="dataNascimento" id="dataNascimento" value="{{ old('dataNascimento') }}">
+            </div>
+
+            <!-- Exibir mensagens de validação de erro -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <button type="submit" class="btn-cadastrar">Criar</button>
+        </form>
     </div>
 
 </body>

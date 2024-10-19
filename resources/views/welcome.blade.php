@@ -40,11 +40,19 @@
         .btn-entrar:hover {
             background-color: #006400; /* Tom mais escuro ao passar o mouse */
         }
+        img {
+            width: 100%;
+            height: auto; /* Mantém a proporção da imagem */
+            margin-bottom: 1px; /* Espaço entre a imagem e o título */
+        }
     </style>
+    
 </head>
 <body>
     <div class="container">
-        <h1>Bem-Vindo!</h1>
+        <img src="{{ asset('imagens/logo-mini.svg') }}" alt="Imagem de boas-vindas">
+        <h1>Bem-Vindo</h1>
+        <h2>O Melhor que Ha!</h2>
         <a href="{{ route('telaLogin') }}">
             <button
             class="btn-entrar"> Entrar
