@@ -52,7 +52,7 @@
     <div class="container">
         <img src="{{ asset('imagens/logo-mini.svg') }}" alt="Imagem de boas-vindas">
         <h1>Bem-Vindo</h1>
-        <h2>O Melhor que Ha!</h2>
+        <h2>O Melhor que Há!</h2>
         <a href="{{ route('telaLogin') }}">
             <button
             class="btn-entrar"> Entrar
