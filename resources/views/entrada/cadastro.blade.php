@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Cadastro</title>
     <style>
+
         body, html {
             margin: 0;
             padding: 0;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UsersModel;
-use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
@@ -14,7 +14,24 @@ class UsersController extends Controller
         return view('entrada.login');
     }
   
+    public function login(Request $request)
+    {
+       
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
 
+        $credentials = $request->only('email', 'password'); 
+
+        if (Auth::attempt($credentials)) {
+           
+            return redirect()->route('telaMenu')->with('success', 'Login efetuado com sucesso.');
+        } else {
+         
+            return back()->with('error', 'Email ou senha inválidos.');
+        }
+    }
     public function index()
     {
         //
