@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Login</title>
+    <title>Login</title>
     <style>
         body, html {
             margin: 0;
@@ -30,7 +30,7 @@
             margin-bottom: 20px;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="email"], input[type="password"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -121,8 +121,8 @@
 
         <form action="{{ route('login') }}" method="POST">
             @csrf
-            <input type="text" placeholder="Email" name="email" value="{{ old('email') }}" required>
-            <input type="password" placeholder="Senha" name="senha" required>
+            <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
+            <input type="password" placeholder="senha" name="password" required>
 
             <button type="submit" class="btn-login">Entrar</button>
         </form>

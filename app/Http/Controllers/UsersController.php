@@ -16,21 +16,25 @@ class UsersController extends Controller
   
     public function login(Request $request)
     {
-       
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
+        // Validação do formulário
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ]);
 
-        $credentials = $request->only('email', 'password'); 
+    // Procurar o usuário pelo email
+    $user = \App\Models\UsersModel::where('email', $request->email)->first();
 
-        if (Auth::attempt($credentials)) {
-           
-            return redirect()->route('telaMenu')->with('success', 'Login efetuado com sucesso.');
-        } else {
-         
-            return back()->with('error', 'Email ou senha inválidos.');
-        }
+    // Verificar se o usuário existe e se a senha está correta
+    if ($user && \Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
+        // Autenticar o usuário
+        Auth::login($user);
+        return redirect()->route('telaMenu')->with('success', 'Login efetuado com sucesso.');
+    } else {
+        // Caso a senha ou o email estejam incorretos
+        return back()->with('error', 'Email ou senha inválidos.');
+    }
+        
     }
     public function index()
     {
