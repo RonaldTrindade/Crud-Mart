@@ -38,14 +38,22 @@
             top: 20px;
             left: 20px;
             font-size: 1.5rem;
-            color: #32CD32; /* Cor do ícone verde */
+            color: #228B22; /* Cor verde igual ao botão cadastrar */
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, background-color 0.3s ease;
+
         }
 
-        .back-icon:hover {
-            color: #006400; /* Cor ao passar o mouse */
+        /* Forçando a cor correta para o ícone */
+        .back-icon i {
+            color: #32CD32 !important; /* Força a cor verde no ícone */
         }
+
+        .back-icon:hover i {
+            color: #155724 !important; /* Força a cor branca no hover */
+        }
+
+      
 
         .form-group {
             display: flex;
