@@ -94,7 +94,7 @@
         <div class="logo">Controle de Estoque</div>
         <nav>
             <a href="#produtos">Produtos</a>
-            <a href="#estoque">Estoque</a>
+            <a href="{{ route('telaEstoque') }}">Estoque</a>
             <a href="#usuario" onclick="toggleUserBar(event)">Usuário</a>
         </nav>
     </header>

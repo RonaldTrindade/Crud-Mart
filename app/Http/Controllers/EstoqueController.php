@@ -3,62 +3,104 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Estoque; // Certifique-se de que o modelo Estoque está importado
+use App\Models\EstoqueModel;
 
 class EstoqueController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Exibe a tela de gerenciamento de estoque.
      */
-    public function index()
-    {
-        //
+    public function telaEstoque() {
+        $estoques = EstoqueModel::all(); // Carrega todos os estoques
+        return view('estoque.telaDeEstoque', compact('estoques')); // Passa $estoques para a view
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Exibe um estoque específico com base no ID.
      */
-    public function create()
-    {
-        //
+    public function show($id) {
+        $estoque = EstoqueModel::find($id);
+
+        if (!$estoque) {
+            return redirect()->route('estoque.telaEstoque')->with('error', 'Estoque não encontrado.');
+        }
+
+        return view('estoque.show', compact('estoque'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Exibe o formulário para criar um novo estoque.
      */
-    public function store(Request $request)
-    {
-        //
+    public function create() {
+        return view('estoque.create');
     }
 
     /**
-     * Display the specified resource.
+     * Armazena um novo estoque no banco de dados.
      */
-    public function show(string $id)
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'descricao' => 'required|string|max:255',
+            'quantidadeDeProdutos' => 'required|integer|min:1'
+        ]);
+
+        EstoqueModel::create([
+            'descricao' => $request->descricao,
+            'quantidadeDeProdutos' => $request->quantidadeDeProdutos
+        ]);
+
+        return redirect()->route('estoque.telaEstoque')->with('success', 'Estoque criado com sucesso!');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Exibe o formulário para editar um estoque específico.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit($id) {
+        $estoque = EstoqueModel::find($id);
+
+        if (!$estoque) {
+            return redirect()->route('estoque.telaEstoque')->with('error', 'Estoque não encontrado.');
+        }
+
+        return view('estoque.edit', compact('estoque'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza um estoque específico no banco de dados.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $estoque = EstoqueModel::find($id);
+
+        if (!$estoque) {
+            return redirect()->route('estoque.telaEstoque')->with('error', 'Estoque não encontrado.');
+        }
+
+        $request->validate([
+            'descricao' => 'required|string|max:255',
+            'quantidadeDeProdutos' => 'required|integer|min:1'
+        ]);
+
+        $estoque->update([
+            'descricao' => $request->descricao,
+            'quantidadeDeProdutos' => $request->quantidadeDeProdutos
+        ]);
+
+        return redirect()->route('estoque.telaEstoque')->with('success', 'Estoque atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove um estoque específico do banco de dados.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id) {
+        $estoque = EstoqueModel::find($id);
+
+        if (!$estoque) {
+            return redirect()->route('estoque.telaEstoque')->with('error', 'Estoque não encontrado.');
+        }
+
+        $estoque->delete();
+
+        return redirect()->route('estoque.telaEstoque')->with('success', 'Estoque excluído com sucesso!');
     }
 }
