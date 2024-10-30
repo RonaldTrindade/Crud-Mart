@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('estoque_models', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('descricao');
+            $table->integer('quantidadeDeProdutos'); 
+
+            // Adicionando a chave estrangeira
+            $table->foreignId('user_id')->constrained('users_models')->onDelete('cascade');
         });
     }
 

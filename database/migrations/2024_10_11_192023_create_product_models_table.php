@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->double('valor');
             $table->string('descricao');
-            
+
+            // Adicionando a chave estrangeira
+            $table->foreignId('estoque_id')->constrained('estoque_models')->onDelete('cascade');
         });
     }
 
