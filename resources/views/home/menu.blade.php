@@ -108,19 +108,51 @@
             <!-- Barrinha do usuário -->
             <div class="user-bar" id="userBar">
                 <h3>Informações do Usuário</h3>
-                <p><strong>Nome do Usuário:</strong> João Silva</p>
-                <p><strong>ID do Usuário:</strong> 12345</p>
-                <button class="btn-cadastrar">Logout</button>
+                <p><strong>Nome do Usuário:</strong> <span id="userName"></span></p>
+                <p><strong>ID do Usuário:</strong> <span id="userId"></span></p>
+                <button class="btn-cadastrar" onclick="logout()">Logout</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Função para salvar dados de usuário na sessão para exibir na barra
+        function setUserDataInLocalStorage() {
+            @if(session('userName') && session('userId'))
+                localStorage.setItem('userName', "{{ session('userName') }}");
+                localStorage.setItem('userId', "{{ session('userId') }}");
+            @endif
+        }
+
+        // Carrega dados do usuário do localStorage e exibe na user-bar
+        function loadUserData() {
+            const userName = localStorage.getItem('userName') || 'Usuário';
+            const userId = localStorage.getItem('userId') || '12345';
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('userId').textContent = userId;
+        }
+
+        // Alterna a exibição da user-bar
         function toggleUserBar(event) {
-            event.preventDefault(); // Evita o comportamento padrão do link
+            event.preventDefault();
             const userBar = document.getElementById('userBar');
             userBar.style.display = userBar.style.display === 'none' || userBar.style.display === '' ? 'block' : 'none';
+            loadUserData(); // Carrega dados sempre que a barra for exibida
         }
+
+        // Função de logout
+        function logout() {
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userName');
+            alert('Logout efetuado com sucesso.');
+            location.href = "{{ route('telaLogin') }}";
+        }
+
+        // Carrega os dados da sessão para o localStorage ao carregar a página
+        document.addEventListener("DOMContentLoaded", function () {
+            setUserDataInLocalStorage();
+            loadUserData();
+        });
     </script>
 </body>
 </html>
