@@ -49,13 +49,13 @@
         /* Conteúdo Principal */
         .container {
             display: flex;
-            padding: 20px;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
         }
 
         /* Formulário de criação de estoque */
-        .form-container {
+        .form-container, .filter-container, .estoque-list {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -65,24 +65,20 @@
             margin-bottom: 20px;
         }
 
-        /* Campo de filtro */
-        .filter-container {
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .form-container h2, .estoque-list h3 {
+            margin: 0 0 15px 0;
         }
 
-        .filter-container input[type="number"] {
-            width: 70%;
+        /* Estilo dos campos de entrada */
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 20px);
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin-bottom: 10px;
         }
 
-        .btn-filter {
+        .btn-submit, .btn-filter {
             padding: 10px 15px;
             font-size: 1rem;
             color: white;
@@ -93,24 +89,11 @@
             transition: background-color 0.3s ease;
         }
 
-        .btn-filter:hover {
+        .btn-submit:hover, .btn-filter:hover {
             background-color: #006400;
         }
 
         /* Lista de estoques */
-        .estoque-list {
-            width: 100%;
-            max-width: 500px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .estoque-list h3 {
-            margin: 0 0 15px 0;
-        }
-
         .estoque-item {
             padding: 10px;
             border-bottom: 1px solid #ccc;
@@ -118,6 +101,23 @@
 
         .estoque-item:last-child {
             border-bottom: none;
+        }
+
+        /* Estilo da mensagem */
+        .message {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        /* Seção do usuário */
+        .user-bar {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 500px;
         }
     </style>
 </head>
@@ -134,6 +134,7 @@
 
     <!-- Conteúdo Principal -->
     <div class="container">
+        <!-- Formulário de criação de estoque -->
         <div class="form-container">
             <h2>Criar Estoque</h2>
             <form action="{{ route('adicionarEstoque') }}" method="POST">
@@ -173,6 +174,12 @@
                     </div>
                 @endforeach
             </div>
+        </div>
+
+        <!-- Barra de usuário -->
+        <div id="userBar" class="user-bar">
+            <strong>Nome do Usuário:</strong> <span id="userName"></span> <br>
+            <strong>ID do Usuário:</strong> <span id="userId"></span>
         </div>
     </div>
 
